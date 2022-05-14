@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'movies:cauta' %}" class="form-inline" method="get">
+       <div class="form-group mx-sm-3 mb-2">
+        <label for="" class="sr-only">search</label>
+        <input name="search" type="" class="form-control" id="" placeholder="movies to search">
+        </div>
+        <button type="submit" class="btn btn-success btn-lg mb-2">Search</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Rating</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in movies_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.rating }}</td>
+                <td>
+                    {% if item.added == 0 %}
+                    <a href="{% url 'movies:adauga' item.id %}" class="btn btn-danger">Add to watchlist</a>
+                    {% else %}
+                    Is in your watchlist
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="http://127.0.0.1:8000/movies/" class="btn btn-info">Add movie to watch</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Index</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Rating</th>
+            <th>Your Rating</th>
+            <th>Watched</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in watchlist_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.rating }}</td>
+                <td>{{ item.your_rating }}</td>
+                <td>
+                    {% if item.watched == 0 %}
+                        <span>Unwatched</span>
+                    {% else %}
+                        <span>Watched</span>
+                    {% endif %}
+                    </td>
+                <td>
+                    <a href="{% url 'watchlist:modifica' item.id %}" class="btn btn-info">Modify</a>
+                    {% if item.watched == 0 %}
+                        <a href="{% url 'watchlist:vazut' item.id %}" class="btn btn-success">I watched it</a>
+                    {% else %}
+                        <!--<a href="{% url 'watchlist:activeaza' item.id %}" class="btn btn-danger">Rewatch</a>-->
+                        <a href="{% url 'watchlist:rate' item.id %}" class="btn btn-success">Rate</a>
+                    {% endif %}
+                    <a href="{% url 'watchlist:sterge' item.id %}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
