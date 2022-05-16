@@ -13,6 +13,7 @@
                 <a class="btn" href="{% url 'watchlist:lista_watchlist' %}">Watchlist</a>
                 <a class="btn" href="{% url 'movies:lista_movies' %}">Movies</a>
                 <a class="btn" href="{% url 'logout' %}">Logout</a>
+                <span>Hi, {{ request.user.username }}</span>
                 {% endif %}
             </nav>
         </div>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-info">Register</button>
+        <span style="color: red">
+            {{ form.non_field_errors }}
+        </span>
+    </form>
+{% endblock %}
